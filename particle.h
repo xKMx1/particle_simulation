@@ -8,6 +8,9 @@ class Particle {
 public:
   Particle(float radius, sf::Vector2f pos);
   void render(sf::RenderTarget *target);
+  void resolveColision();
+  void update(float dt);
+  void detectColision();
 
 private:
   sf::CircleShape m_shape;
