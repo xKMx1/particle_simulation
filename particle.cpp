@@ -1,7 +1,8 @@
 #include "particle.h"
 
-Particle::Particle(float radius, sf::Vector2f pos) {
-  this->m_position = pos;
+Particle::Particle(float radius, sf::Vector2i pos) {
+  this->m_position.x = pos.x;
+  this->m_position.y = pos.y;
 
   this->m_shape.setRadius(radius);
   this->m_shape.setOrigin(m_shape.getGlobalBounds().width / 2,
@@ -10,17 +11,31 @@ Particle::Particle(float radius, sf::Vector2f pos) {
   this->m_shape.setPosition(m_position);
 }
 
+void Particle::setVelocity(sf::Vector2f vel) { m_velocity = vel; }
+
 void Particle::render(sf::RenderTarget *target) { target->draw(this->m_shape); }
 
-void Particle::detectColision() { if (m_position.x - m_shape.getRadius() < 0) }
+void Particle::handleColision(const int screenWidth, const int screenHeight) {
+  if (m_position.x - m_shape.getRadius() < 0) {
+    m_velocity.x *= -1;
+  }
+  if (m_position.x + m_shape.getRadius() > screenWidth) {
+    m_velocity.x *= -1;
+  }
+  if (m_position.y - m_shape.getRadius() < 0) {
+    m_velocity.y *= -1;
+  }
+  if (m_position.y + m_shape.getRadius() > screenHeight) {
+    m_velocity.y *= -1;
+  }
+}
 
-void Particle::resolveColision() {}
-
-void Particle::update(float dt) {
-  this->m_velocity += this->m_acceleration * dt;
-  this->m_position += this->m_velocity * dt;
+void Particle::update(float dt, const int screenWidth, const int screenHeight,
+                      const float particleSpeed) {
+  this->m_velocity += this->m_acceleration * dt * particleSpeed;
+  this->m_position += this->m_velocity * dt * particleSpeed;
 
   this->m_shape.setPosition(m_position);
 
-  this->detectColision();
+  this->handleColision(screenWidth, screenHeight);
 }

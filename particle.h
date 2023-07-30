@@ -6,11 +6,12 @@
 
 class Particle {
 public:
-  Particle(float radius, sf::Vector2f pos);
+  Particle(float radius, sf::Vector2i pos);
   void render(sf::RenderTarget *target);
-  void resolveColision();
-  void update(float dt);
-  void detectColision();
+  void update(float dt, const int screenWidth, const int screenHeight,
+              const float particleSpeed);
+  void handleColision(int screenWidth, int screenHeight);
+  void setVelocity(sf::Vector2f vel);
 
 private:
   sf::CircleShape m_shape;
