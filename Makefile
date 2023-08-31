@@ -2,7 +2,7 @@ LIBS:=-Lsrc/lib -lsfml-graphics -lsfml-window -lsfml-system
 
 all: ParticleSimulation
 
-main.o: main.cpp particle.h
+main.o: main.cpp particle.h AppObject.h
 	g++ -Isrc/include -c main.cpp
 
 particle.o: particle.cpp particle.h vectorMath.h
@@ -11,5 +11,8 @@ particle.o: particle.cpp particle.h vectorMath.h
 vector.o: vectorMath.cpp vectorMath.h
 	g++ -Isrc/include -c "vectorMath.cpp" -o vector.o
 
-ParticleSimulation: main.o particle.o vector.o
-	g++ -o ParticleSimulation main.o particle.o vector.o $(LIBS)
+AppObject.o: AppObject.cpp particle.h
+	g++ -Isrc/include -c "AppObject.cpp" -o AppObject.o
+
+ParticleSimulation: main.o particle.o AppObject.o vector.o
+	g++ -o ParticleSimulation main.o particle.o AppObject.o vector.o $(LIBS)

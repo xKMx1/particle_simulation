@@ -1,4 +1,5 @@
 #include "particle.h"
+#include "AppObject.h"
 
 #define PI 3.14159265
 
@@ -10,12 +11,12 @@ int main() {
   sf::Texture texture;
   sf::Clock frameClock;
 
-  Particle part1(30.f, sf::Vector2i(WIDTH, HEIGHT) / 2);
-  part1.setVelocity(sf::Vector2f(5.f, 1.f));
+  AppObject game;
+  game.createNewParticle();
 
   window.setFramerateLimit(60);
   while (window.isOpen()) {
-    sf::Event event;
+    sf::Event event{};
 
     while (window.pollEvent(event)) {
       switch (event.type) {
@@ -26,9 +27,9 @@ int main() {
     }
     window.clear(sf::Color(255, 255, 255));
 
-    part1.update(frameClock.restart().asSeconds(), WIDTH, HEIGHT, 100.f);
+    game.updateState(frameClock.restart().asSeconds(), WIDTH, HEIGHT, 100.f);
+    game.render(&window);
 
-    part1.render(&window);
     window.display();
   }
   return 0;
