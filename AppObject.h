@@ -11,6 +11,7 @@ private:
 public:
     AppObject(sf::Font* font);
     void createNewParticle();
+    void listenForButton(bool clickEvent, sf::Vector2i mousePos);
     void updateState(float dt, int screenWidth, int screenHeight,
                      float particleSpeed);
     void render(sf::RenderTarget *target);

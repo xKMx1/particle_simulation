@@ -14,6 +14,12 @@ void AppObject::createNewParticle() {
     particleList.push_back(particle);
 }
 
+void AppObject::listenForButton(bool clickEvent, sf::Vector2i mousePos){
+    if(button.buttonClicked(clickEvent, mousePos)){
+        createNewParticle();
+    }
+}
+
 void AppObject::updateState(float dt, int screenWidth, int screenHeight,
                             float particleSpeed) {
     for(auto &i: particleList){

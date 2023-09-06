@@ -19,3 +19,14 @@ void Button::render(sf::RenderTarget *target){
     target->draw(m_shape);
     target->draw(m_text);
 }
+
+bool Button::buttonClicked(bool clickEvent, sf::Vector2i mousePosition) {
+    if (static_cast<float>(mousePosition.x) <= m_shape.getPosition().x + m_shape.getSize().x &&
+        static_cast<float>(mousePosition.x) >= m_shape.getPosition().x &&
+        static_cast<float>(mousePosition.y) <= m_shape.getPosition().y + m_shape.getSize().y &&
+        static_cast<float>(mousePosition.y) >= m_shape.getPosition().y &&
+        clickEvent) {
+        return true;
+    }
+    return false;
+}

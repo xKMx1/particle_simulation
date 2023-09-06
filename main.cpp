@@ -17,20 +17,25 @@ int main() {
   }
 
   AppObject game(&fontForButton);
-  game.createNewParticle();
 
   window.setFramerateLimit(60);
   while (window.isOpen()) {
     sf::Event event{};
-
+    bool buttonSwitch = false;
     while (window.pollEvent(event)) {
       switch (event.type) {
       case sf::Event::Closed:
         window.close();
         break;
+      case sf::Event::MouseButtonReleased:
+        if (event.mouseButton.button == sf::Mouse::Left) {
+          buttonSwitch = true;
+        }
+        break;
       }
     }
     window.clear(sf::Color(255, 255, 255));
+    game.listenForButton(buttonSwitch, sf::Mouse::getPosition(window));
 
     game.updateState(frameClock.restart().asSeconds(), WIDTH, HEIGHT, 100.f);
     game.render(&window);
