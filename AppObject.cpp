@@ -1,6 +1,8 @@
 #include "AppObject.h"
 
-AppObject::AppObject() = default;
+AppObject::AppObject(sf::Font* font){
+    button.initButton(font);
+}
 
 void AppObject::createNewParticle() {
     float temp_radius {30.f};
@@ -23,4 +25,5 @@ void AppObject::render(sf::RenderTarget *target) {
     for(auto &i: particleList){
         i.render(target);
     }
+    button.render(target);
 }

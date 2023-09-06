@@ -11,7 +11,12 @@ int main() {
   sf::Texture texture;
   sf::Clock frameClock;
 
-  AppObject game;
+  sf::Font fontForButton;
+  if (!fontForButton.loadFromFile("font/font.otf")) {
+    std::cout << "Font error " << std::endl;
+  }
+
+  AppObject game(&fontForButton);
   game.createNewParticle();
 
   window.setFramerateLimit(60);
