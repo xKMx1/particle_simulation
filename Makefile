@@ -11,8 +11,11 @@ particle.o: particle.cpp particle.h vectorMath.h
 vector.o: vectorMath.cpp vectorMath.h
 	g++ -Isrc/include -c "vectorMath.cpp" -o vector.o
 
-AppObject.o: AppObject.cpp particle.h
+AppObject.o: AppObject.cpp particle.h Button.h
 	g++ -Isrc/include -c "AppObject.cpp" -o AppObject.o
 
-ParticleSimulation: main.o particle.o AppObject.o vector.o
-	g++ -o ParticleSimulation main.o particle.o AppObject.o vector.o $(LIBS)
+Button.o: Button.cpp button.h
+	g++ -Isrc/include -c "Button.cpp" -o Button.o
+
+ParticleSimulation: main.o particle.o AppObject.o vector.o Button.o
+	g++ -o ParticleSimulation main.o particle.o AppObject.o vector.o Button.o $(LIBS)
