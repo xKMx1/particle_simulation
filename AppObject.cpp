@@ -2,6 +2,18 @@
 
 AppObject::AppObject(sf::Font* font){
     button.initButton(font);
+
+    int count = 0;
+    for(int i = 0; i < 16; i++){                   // we make grid of points 80px80p apart
+        for(int j = 0; j < 9; j++){
+            std::cout << count << " - (" << i*80 << ", " << j*80 << ") "; 
+            listOfPoints[count].setPosition(i * 80, j * 80);
+            listOfPoints[count].setFillColor(sf::Color::Black);
+            listOfPoints[count].setRadius(5.f);
+            count++;
+        }
+        std::cout << '\n';
+    }
 }
 
 void AppObject::createNewParticle() {
@@ -27,9 +39,16 @@ void AppObject::updateState(float dt, int screenWidth, int screenHeight,
     }
 }
 
+void AppObject::scanForCollision(){
+
+}
+
 void AppObject::render(sf::RenderTarget *target) {
     for(auto &i: particleList){
         i.render(target);
+    }
+    for(int i =0; i < 144; i++){
+        target->draw(listOfPoints[i]);
     }
     button.render(target);
 }
