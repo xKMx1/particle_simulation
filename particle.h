@@ -11,6 +11,7 @@ public:
   void update(float dt, int screenWidth, int screenHeight,
               float particleSpeed);
   void handleCollision(int screenWidth, int screenHeight);
+  sf::Vector2i determinePositionSquare();
   void setVelocity(sf::Vector2f vel);
 
 private:

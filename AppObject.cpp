@@ -6,7 +6,6 @@ AppObject::AppObject(sf::Font* font){
     int count = 0;
     for(int i = 0; i < 16; i++){                   // we make grid of points 80px80p apart
         for(int j = 0; j < 9; j++){
-            std::cout << count << " - (" << i*80 << ", " << j*80 << ") "; 
             listOfPoints[count].setPosition(i * 80, j * 80);
             listOfPoints[count].setFillColor(sf::Color::Black);
             listOfPoints[count].setRadius(5.f);
@@ -40,7 +39,9 @@ void AppObject::updateState(float dt, int screenWidth, int screenHeight,
 }
 
 void AppObject::scanForCollision(){
-
+    for(auto &i : particleList){
+        i.determinePositionSquare();
+    }
 }
 
 void AppObject::render(sf::RenderTarget *target) {

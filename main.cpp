@@ -36,6 +36,7 @@ int main() {
     }
     window.clear(sf::Color(255, 255, 255));
     game.listenForButton(buttonSwitch, sf::Mouse::getPosition(window));
+    game.scanForCollision();
 
     game.updateState(frameClock.restart().asSeconds(), WIDTH, HEIGHT, 100.f);
     game.render(&window);

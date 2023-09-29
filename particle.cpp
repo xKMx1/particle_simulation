@@ -30,6 +30,34 @@ void Particle::handleCollision(const int screenWidth, const int screenHeight) {
   }
 }
 
+sf::Vector2i Particle::determinePositionSquare(){
+	int xCoord{};
+	int yCoord{};
+	bool returnFlagX = 0;
+	bool returnFlagY = 0;
+	while (true)
+	{
+		if(m_position.x > (xCoord + 1) * 80){
+			xCoord++;
+		}
+		else {
+			returnFlagX = true;
+		}
+
+		if(m_position.y > (yCoord + 1) * 80){
+			yCoord++;
+		}
+		else {
+			returnFlagY = true;
+		}
+
+		if(returnFlagX && returnFlagY){
+			return sf::Vector2i(xCoord, yCoord);
+		}
+	}
+	
+}
+
 void Particle::update(float dt, const int screenWidth, const int screenHeight,
                       const float particleSpeed) {
   m_velocity += m_acceleration * dt * particleSpeed;
