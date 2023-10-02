@@ -17,4 +17,5 @@ public:
     void updateState(float dt, int screenWidth, int screenHeight,
                      float particleSpeed);
     void render(sf::RenderTarget *target);
+    bool doParticlesOverlap(sf::Vector2f particleOnePos, float particleOneRadius, sf::Vector2f particleTwoPos, float particleTwoRadius);
 };

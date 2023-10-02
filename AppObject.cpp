@@ -19,7 +19,7 @@ void AppObject::createNewParticle() {
     float temp_radius {30.f};
     sf::Vector2i temp_position {30, 30};
 
-    Particle particle = Particle{temp_radius, temp_position};
+    Particle particle = Particle{temp_radius, temp_position, particleList.size()};
     particle.setVelocity(sf::Vector2f(5.f, 1.f));
 
     particleList.push_back(particle);
@@ -39,9 +39,19 @@ void AppObject::updateState(float dt, int screenWidth, int screenHeight,
 }
 
 void AppObject::scanForCollision(){
-    for(auto &i : particleList){
-        i.determinePositionSquare();
+    for(auto &ball : particleList){
+        for(auto &target : particleList){
+            if(ball.getIndex() != target.getIndex()){
+                if(doParticlesOverlap(ball.getPosition(), ball.getRadius(), target.getPosition(), target.getRadius())){
+                    
+                }
+            }
+        }
     }
+}
+
+bool AppObject::doParticlesOverlap(sf::Vector2f particleOnePos, float particleOneRadius, sf::Vector2f particleTwoPos, float particleTwoRadius){
+    return abs(((particleTwoPos.x - particleOnePos.x) * (particleTwoPos.x - particleOnePos.x)) + ((particleTwoPos.y - particleOnePos.y) * (particleTwoPos.y - particleOnePos.y))) < ((particleOneRadius + particleTwoRadius) * (particleOneRadius + particleTwoRadius));
 }
 
 void AppObject::render(sf::RenderTarget *target) {

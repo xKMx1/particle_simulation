@@ -1,6 +1,8 @@
 #include "particle.h"
 
-Particle::Particle(float radius, sf::Vector2i pos) {
+Particle::Particle(float radius, sf::Vector2i pos, int index) {
+  m_index = index;
+
   m_position.x = static_cast<float>(pos.x);
   m_position.y = static_cast<float>(pos.y);
 
@@ -66,4 +68,16 @@ void Particle::update(float dt, const int screenWidth, const int screenHeight,
   m_shape.setPosition(m_position);
 
   handleCollision(screenWidth, screenHeight);
+}
+
+int Particle::getIndex(){
+    return m_index;
+}
+
+sf::Vector2f Particle::getPosition(){
+    return m_position;
+}
+
+float Particle::getRadius(){
+    m_shape.getRadius();
 }
